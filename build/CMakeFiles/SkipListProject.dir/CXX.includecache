@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tom/project/skiplist_cpp/logger/logger.cpp
+logger.h
+/home/tom/project/skiplist_cpp/logger/logger.h
+iostream
+-
+filesystem
+-
+algorithm
+-
+sstream
+-
+iomanip
+-
+
+/home/tom/project/skiplist_cpp/logger/logger.h
+string
+-
+fstream
+-
+mutex
+-
+memory
+-
+sstream
+-
+chrono
+-
+iomanip
+-
+
