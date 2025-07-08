@@ -16,6 +16,7 @@ enum class RedisType {
 
 // Redis值类型 - 使用variant避免循环引用
 struct RedisValue {
+    // value可以是字符串，64为整数，或者一个RedisValue智能指针数组
     std::variant<std::string, int64_t, std::vector<std::shared_ptr<RedisValue>>> value;
     
     // 构造函数
@@ -24,7 +25,7 @@ struct RedisValue {
     RedisValue(int64_t num) : value(num) {}
     RedisValue(const std::vector<std::shared_ptr<RedisValue>>& arr) : value(arr) {}
     
-    // 访问器
+    // 访问器   
     template<typename T>
     bool holds_alternative() const {
         return std::holds_alternative<T>(value);

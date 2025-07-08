@@ -9,7 +9,7 @@ RedisValuePtr RedisProtocol::parse(const std::string& data) {
     }
     
     size_t pos = 0;
-    char type = data[0];
+    char type = data[0]; //第一个字符判断RESP的类型
     
     switch (type) {
         case '+': return parseSimpleString(data, pos);
