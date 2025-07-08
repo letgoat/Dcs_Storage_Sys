@@ -4,6 +4,8 @@
 #include <memory>
 #include <variant>
 
+// 命令: SET 1 "Hello world" --> RESP格式： *3\r\n$3\r\nSET\r\n$1\r\n1\r\n$11\r\nHello world\r\n
+
 // Redis数据类型
 enum class RedisType {
     SIMPLE_STRING,
