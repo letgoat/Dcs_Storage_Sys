@@ -18,6 +18,7 @@ bool ClientConnection::send(const std::string& data) {
     }
     
     size_t total_sent = 0;
+    //TCP的send不能保证一次发完所有数据，可能由于缓冲区慢，网络状况等等
     while (total_sent < data.length()) {
         int sent = ::send(socket_, data.c_str() + total_sent, 
                          static_cast<int>(data.length() - total_sent), 0);
@@ -86,6 +87,7 @@ bool TCPServer::init(const std::string& host, int port, int thread_pool_size) {
     }
     
     // 设置socket选项
+    // 允许服务器socket端口被快速重用，避免重启服务器端口被占用的问题
     int opt = 1;
     if (setsockopt(server_socket_, SOL_SOCKET, SO_REUSEADDR, 
                    reinterpret_cast<char*>(&opt), sizeof(opt)) < 0) {
@@ -118,7 +120,7 @@ bool TCPServer::init(const std::string& host, int port, int thread_pool_size) {
     
     // 创建工作线程
     for (int i = 0; i < thread_pool_size; ++i) {
-        worker_threads_.emplace_back(&TCPServer::workerLoop, this);
+        worker_threads_.emplace_back(&TCPServer::workerLoop, this);//原地构建新的thread，所以直接传参即可
     }
     
     return true;
@@ -229,7 +231,7 @@ void TCPServer::workerLoop() {
             }
         }
         
-        if (task.client && message_handler_) {
+        if (task.client && message_handler_) { //是否有效的客户端连接，并且消息处理器
             std::string response = message_handler_(task.data, task.client);
             if (!response.empty()) {
                 task.client->send(response);

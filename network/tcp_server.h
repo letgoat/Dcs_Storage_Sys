@@ -129,7 +129,7 @@ private:
     
     // 连接管理
     std::vector<std::shared_ptr<ClientConnection>> connections_;
-    mutable std::mutex connections_mutex_;
+    mutable std::mutex connections_mutex_; //为了在const成员函数中也能进行加锁
     
     // 网络库初始化标志
     bool network_initialized_;
