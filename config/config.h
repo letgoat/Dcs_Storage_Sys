@@ -44,6 +44,7 @@ public:
         int aof_fsync_interval = 1; // 秒
     };
     
+    // 配置优先级：环境变量 > 配置文件 > 默认值
     // 加载配置文件
     bool loadFromFile(const std::string& filename);
     
