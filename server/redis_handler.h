@@ -6,6 +6,7 @@
 #include "../skiplist/skiplist.h"
 #include "../network/redis_protocol.h"
 #include "../network/tcp_server.h"
+#include "../replication/replication_manager.h"
 #include <fstream>
 #include <chrono>
 
@@ -54,6 +55,15 @@ public:
     void flushAOF();
     void reopenAOF();
     bool isAOFEnabled() const;
+
+    // 复制相关
+    void initReplication(const std::string& master_host = "", int master_port = 0);
+    bool startReplication();
+    void stopReplication();
+    bool isMaster() const;
+    bool isSlave() const;
+    void addSlave(const std::string& host, int port);
+    std::vector<SlaveInfo> getSlaves() const;
 
 private:
     // 命令处理函数类型
@@ -116,4 +126,7 @@ private:
     int aof_fsync_interval_ = 1;
     std::mutex aof_mutex_;
     std::chrono::system_clock::time_point last_aof_fsync_;
+
+    // 复制相关
+    std::unique_ptr<ReplicationManager> replication_manager_;
 }; 

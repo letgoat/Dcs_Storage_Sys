@@ -28,6 +28,7 @@ file(GLOB_RECURSE SOURCES
     "logger/*.cpp"
     "config/*.cpp"
     "utils/*.cpp"
+    "replication/*.cpp"
 )
 
 # 创建可执行文件

@@ -44,6 +44,9 @@ void RedisHandler::init(int max_level) {
     // 加载现有数据
     loadData();
     
+    // 初始化复制管理器
+    initReplication();
+    
     LOG_INFO("Redis handler initialized with max level: " + std::to_string(max_level));
 }
 
@@ -174,6 +177,12 @@ std::string RedisHandler::handleSet(const std::vector<std::string>& args, std::s
     if (result == 0) {
         // 追加AOF
         appendAOF("SET " + args[0] + " " + args[1]);
+        
+        // 复制命令到从节点
+        if (replication_manager_ && replication_manager_->isMaster()) {
+            replication_manager_->replicateCommand("SET " + args[0] + " " + args[1]);
+        }
+        
         return RedisProtocol::createSimpleString("OK");
     } else {
         return createErrorResponse("ERR failed to set key");
@@ -224,6 +233,12 @@ std::string RedisHandler::handleDel(const std::vector<std::string>& args, std::s
     
     // 追加AOF
     appendAOF("DEL " + args[0]);
+    
+    // 复制命令到从节点
+    if (replication_manager_ && replication_manager_->isMaster()) {
+        replication_manager_->replicateCommand("DEL " + args[0]);
+    }
+    
     return RedisProtocol::createInteger(1);
 }
 
@@ -263,6 +278,12 @@ std::string RedisHandler::handleFlush(const std::vector<std::string>& args, std:
     
     // 追加AOF
     appendAOF("FLUSH");
+    
+    // 复制命令到从节点
+    if (replication_manager_ && replication_manager_->isMaster()) {
+        replication_manager_->replicateCommand("FLUSH");
+    }
+    
     return RedisProtocol::createSimpleString("OK");
 }
 
@@ -492,4 +513,50 @@ void RedisHandler::loadAOF() {
         handleCommand(line, nullptr); // 直接重放命令
     }
     aof_in.close();
+}
+
+// 复制相关方法实现
+void RedisHandler::initReplication(const std::string& master_host, int master_port) {
+    replication_manager_ = std::make_unique<ReplicationManager>();
+    replication_manager_->init(master_host, master_port);
+    
+    // 设置命令处理器回调
+    replication_manager_->setCommandHandler([this](const std::string& command) {
+        // 从节点接收到复制命令时，直接执行
+        handleCommand(command, nullptr);
+    });
+}
+
+bool RedisHandler::startReplication() {
+    if (replication_manager_) {
+        return replication_manager_->startReplication();
+    }
+    return false;
+}
+
+void RedisHandler::stopReplication() {
+    if (replication_manager_) {
+        replication_manager_->stopReplication();
+    }
+}
+
+bool RedisHandler::isMaster() const {
+    return replication_manager_ && replication_manager_->isMaster();
+}
+
+bool RedisHandler::isSlave() const {
+    return replication_manager_ && replication_manager_->isSlave();
+}
+
+void RedisHandler::addSlave(const std::string& host, int port) {
+    if (replication_manager_) {
+        replication_manager_->addSlave(host, port);
+    }
+}
+
+std::vector<SlaveInfo> RedisHandler::getSlaves() const {
+    if (replication_manager_) {
+        return replication_manager_->getSlaves();
+    }
+    return {};
 } 
