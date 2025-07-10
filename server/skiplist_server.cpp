@@ -1,4 +1,5 @@
 #include "skiplist_server.h"
+#include "../include/exceptions.h"
 #include <iostream>
 #include <chrono>
 #include <filesystem>
@@ -27,8 +28,7 @@ bool SkipListServer::init(const std::string& config_file) {
     try {
         // 加载配置
         if (!loadConfiguration(config_file)) {
-            std::cerr << "Failed to load configuration" << std::endl;
-            return false;
+            throw skiplist::ConfigException("Failed to load configuration");
         }
         
         // 创建必要的目录
@@ -43,8 +43,7 @@ bool SkipListServer::init(const std::string& config_file) {
         
         // 初始化网络服务器
         if (!initNetworkServer()) {
-            LOG_ERROR("Failed to initialize network server");
-            return false;
+            throw skiplist::NetworkException("Failed to initialize network server");
         }
         
         // 设置信号处理
@@ -56,6 +55,9 @@ bool SkipListServer::init(const std::string& config_file) {
         LOG_INFO("SkipList server initialized successfully");
         return true;
         
+    } catch (const skiplist::SkipListException& e) {
+        std::cerr << skiplist::ExceptionUtils::formatExceptionWithCode(e, "SkipListServer::init") << std::endl;
+        return false;
     } catch (const std::exception& e) {
         std::cerr << "Error initializing server: " << e.what() << std::endl;
         return false;

@@ -1,4 +1,5 @@
 #include "config.h"
+#include "../include/exceptions.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -15,8 +16,7 @@ bool Config::loadFromFile(const std::string& filename) {
     
     std::ifstream file(filename);
     if (!file.is_open()) {
-        std::cerr << "Failed to open config file: " << filename << std::endl;
-        return false;
+        throw skiplist::ConfigFileNotFoundException(filename);
     }
     
     std::string line;
@@ -37,7 +37,15 @@ bool Config::loadFromFile(const std::string& filename) {
             value.erase(0, value.find_first_not_of(" \t"));
             value.erase(value.find_last_not_of(" \t") + 1);
             
+            // 验证配置项
+            if (key.empty()) {
+                throw skiplist::ConfigParseException("Empty key in config line: " + line);
+            }
+            
             custom_config_[key] = value;
+        } else if (!line.empty() && line[0] != '#') {
+            // 非空行且不是注释，但没有等号
+            throw skiplist::ConfigParseException("Invalid config line format: " + line);
         }
     }
     

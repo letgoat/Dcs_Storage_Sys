@@ -1,4 +1,5 @@
 #include "tcp_server.h"
+#include "../include/exceptions.h"
 #include <iostream>
 #include <algorithm>
 
@@ -82,8 +83,7 @@ bool TCPServer::init(const std::string& host, int port, int thread_pool_size) {
     // 创建socket
     server_socket_ = socket(AF_INET, SOCK_STREAM, 0);
     if (server_socket_ == INVALID_SOCKET_VALUE) {
-        std::cerr << "Failed to create socket" << std::endl;
-        return false;
+        throw skiplist::SocketException("Failed to create socket");
     }
     
     // 设置socket选项
@@ -91,8 +91,7 @@ bool TCPServer::init(const std::string& host, int port, int thread_pool_size) {
     int opt = 1;
     if (setsockopt(server_socket_, SOL_SOCKET, SO_REUSEADDR, 
                    reinterpret_cast<char*>(&opt), sizeof(opt)) < 0) {
-        std::cerr << "Failed to set socket options" << std::endl;
-        return false;
+        throw skiplist::SocketException("Failed to set socket options");
     }
     
     // 绑定地址
@@ -108,14 +107,12 @@ bool TCPServer::init(const std::string& host, int port, int thread_pool_size) {
     
     if (bind(server_socket_, reinterpret_cast<struct sockaddr*>(&server_addr), 
              sizeof(server_addr)) < 0) {
-        std::cerr << "Failed to bind socket" << std::endl;
-        return false;
+        throw skiplist::BindException(host, port);
     }
     
     // 监听连接
     if (listen(server_socket_, SOMAXCONN) < 0) {
-        std::cerr << "Failed to listen on socket" << std::endl;
-        return false;
+        throw skiplist::SocketException("Failed to listen on socket");
     }
     
     // 创建工作线程
