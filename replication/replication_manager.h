@@ -30,12 +30,18 @@ enum class ReplicationState {
 
 // 从节点信息
 struct SlaveInfo {
+    // 唯一标识一个从节点(host:port)
     std::string id;
+    // 记录从节点的网络地址(主节点建立连接，发送数据，检查状态)
     std::string host;
     int port;
+
     ReplicationState state;
+    // 记录主节点上次与该从节点通信的时间点
     std::chrono::system_clock::time_point last_ping;
+    // 记录从节点已经同步到的复制偏移量
     int64_t replication_offset;
+    // 记录从节点是否在线
     bool is_online;
     
     SlaveInfo(const std::string& h, int p) 
@@ -49,6 +55,7 @@ struct SlaveInfo {
 struct ReplicationLogEntry {
     int64_t offset;
     std::string command;
+    // 记录该条日志条目的生成时间
     std::chrono::system_clock::time_point timestamp;
     
     ReplicationLogEntry(int64_t off, const std::string& cmd)
@@ -165,8 +172,10 @@ private:
     std::mutex master_connection_mutex_;
     
     // 复制日志
+    // 待同步的命令队列
     std::queue<ReplicationLogEntry> replication_log_;
     std::mutex replication_log_mutex_;
+    // 主节点最新的命令编号
     int64_t replication_offset_;
     
     // 线程
@@ -182,8 +191,12 @@ private:
     std::function<void(const std::string&)> command_handler_;
     
     // 配置
+    // 主节点监听端口
     int replication_port_;
+    // 主从之间发送心跳包的时间间隔
     int ping_interval_ms_;
+    // 主从操作的超时时间
     int sync_timeout_ms_;
+    // 主节点保留的最大复制目录条目数
     int max_replication_log_size_;
 }; 
