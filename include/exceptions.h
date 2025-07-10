@@ -186,6 +186,6 @@ namespace ExceptionUtils {
         }
         return info;
     }
-}
+} // namespace ExceptionUtils
 
 } // namespace skiplist 
