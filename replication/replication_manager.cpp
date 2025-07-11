@@ -21,12 +21,12 @@ ReplicationManager::~ReplicationManager() {
 }
 
 void ReplicationManager::init(const std::string& master_host, int master_port) {
-    if (!master_host.empty()) {
+    if (!master_host.empty()) { // 如果主节点地址不为空，说明当前节点不是主节点，而是需要去连接主节点；当前节点为从节点
         // 从节点模式
         setRole(ReplicationRole::SLAVE);
         setMasterAddress(master_host, master_port);
         std::cout << "Initialized as SLAVE, master: " << master_host << ":" << master_port << std::endl;
-    } else {
+    } else { // 主节点为空，说明不需要去连接主节点；当前节点就是主节点
         // 主节点模式
         setRole(ReplicationRole::MASTER);
         std::cout << "Initialized as MASTER" << std::endl;
@@ -200,11 +200,12 @@ void ReplicationManager::applyReplicationCommand(const std::string& command) {
     replication_offset_++;
 }
 
+// 还未实现
 void ReplicationManager::masterLoop() {
     while (running_) {
         try {
             // 处理从节点连接
-            // 这里简化实现，实际应该处理从节点的连接和命令同步
+            // 这里还未实现，实际应该处理从节点的连接和命令同步
             
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
         } catch (const std::exception& e) {
@@ -274,6 +275,7 @@ void ReplicationManager::replicateToSlaves(const std::string& command) {
     }
 }
 
+// 还未实现
 void ReplicationManager::pingSlaves() {
     while (running_) {
         try {
@@ -282,7 +284,7 @@ void ReplicationManager::pingSlaves() {
             std::lock_guard<std::mutex> lock(slaves_mutex_);
             for (auto& slave : slaves_) {
                 // 发送ping命令
-                // 这里简化实现
+                // 这里还未实现
                 slave->last_ping = std::chrono::system_clock::now();
             }
             
@@ -297,6 +299,7 @@ void ReplicationManager::cleanupDeadSlaves() {
     std::lock_guard<std::mutex> lock(slaves_mutex_);
     
     auto now = std::chrono::system_clock::now();
+    // 超时时间是Ping间隔的3倍
     auto timeout = std::chrono::milliseconds(ping_interval_ms_ * 3);
     
     slaves_.erase(

@@ -163,7 +163,8 @@ private:
     // 主节点相关
     std::vector<std::shared_ptr<SlaveInfo>> slaves_;
     mutable std::mutex slaves_mutex_;
-    std::unique_ptr<TCPServer> replication_server_;
+    // 主节点的复制服务器，监听并接受所有从节点的连接
+    std::unique_ptr<TCPServer> replication_server_; 
     
     // 从节点相关
     std::string master_host_;
