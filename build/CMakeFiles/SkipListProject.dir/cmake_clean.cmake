@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/SkipListProject.dir/network/redis_protocol.cpp.o"
   "CMakeFiles/SkipListProject.dir/network/tcp_server.cpp.o"
   "CMakeFiles/SkipListProject.dir/node/node.cpp.o"
+  "CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.o"
   "CMakeFiles/SkipListProject.dir/server/redis_handler.cpp.o"
   "CMakeFiles/SkipListProject.dir/server/skiplist_server.cpp.o"
   "CMakeFiles/SkipListProject.dir/skiplist/skiplist.cpp.o"

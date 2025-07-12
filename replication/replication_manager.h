@@ -139,6 +139,15 @@ private:
     // 主节点相关方法
     void masterLoop();
     void handleSlaveConnection(std::shared_ptr<ClientConnection> client);
+    void handleNewSlaveConnections();
+    void processReplicationQueue();
+    void updateSlaveStats();
+    void checkSlaveHealth();
+    void sendSyncCommands(std::shared_ptr<ClientConnection> client, std::shared_ptr<SlaveInfo> slave);
+    std::string handleReplicationMessage(const std::string& message, std::shared_ptr<ClientConnection> client);
+    void updateSlavePing(const std::string& slave_id);
+    std::string handleSyncRequest(std::shared_ptr<ClientConnection> client, int64_t slave_offset);
+    void updateSlaveOffset(const std::string& slave_id, int64_t offset);
     void replicateToSlaves(const std::string& command);
     void pingSlaves();
     void cleanupDeadSlaves();

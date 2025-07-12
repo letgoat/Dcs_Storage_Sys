@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/tom/project/skiplist_cpp/network/redis_protocol.cpp" "/home/tom/project/skiplist_cpp/build/CMakeFiles/SkipListProject.dir/network/redis_protocol.cpp.o"
   "/home/tom/project/skiplist_cpp/network/tcp_server.cpp" "/home/tom/project/skiplist_cpp/build/CMakeFiles/SkipListProject.dir/network/tcp_server.cpp.o"
   "/home/tom/project/skiplist_cpp/node/node.cpp" "/home/tom/project/skiplist_cpp/build/CMakeFiles/SkipListProject.dir/node/node.cpp.o"
+  "/home/tom/project/skiplist_cpp/replication/replication_manager.cpp" "/home/tom/project/skiplist_cpp/build/CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.o"
   "/home/tom/project/skiplist_cpp/server/redis_handler.cpp" "/home/tom/project/skiplist_cpp/build/CMakeFiles/SkipListProject.dir/server/redis_handler.cpp.o"
   "/home/tom/project/skiplist_cpp/server/skiplist_server.cpp" "/home/tom/project/skiplist_cpp/build/CMakeFiles/SkipListProject.dir/server/skiplist_server.cpp.o"
   "/home/tom/project/skiplist_cpp/skiplist/skiplist.cpp" "/home/tom/project/skiplist_cpp/build/CMakeFiles/SkipListProject.dir/skiplist/skiplist.cpp.o"

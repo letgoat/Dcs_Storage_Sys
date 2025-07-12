@@ -258,6 +258,33 @@ node/node.cpp.s:
 	$(MAKE) -f CMakeFiles/SkipListProject.dir/build.make CMakeFiles/SkipListProject.dir/node/node.cpp.s
 .PHONY : node/node.cpp.s
 
+replication/replication_manager.o: replication/replication_manager.cpp.o
+
+.PHONY : replication/replication_manager.o
+
+# target to build an object file
+replication/replication_manager.cpp.o:
+	$(MAKE) -f CMakeFiles/SkipListProject.dir/build.make CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.o
+.PHONY : replication/replication_manager.cpp.o
+
+replication/replication_manager.i: replication/replication_manager.cpp.i
+
+.PHONY : replication/replication_manager.i
+
+# target to preprocess a source file
+replication/replication_manager.cpp.i:
+	$(MAKE) -f CMakeFiles/SkipListProject.dir/build.make CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.i
+.PHONY : replication/replication_manager.cpp.i
+
+replication/replication_manager.s: replication/replication_manager.cpp.s
+
+.PHONY : replication/replication_manager.s
+
+# target to generate assembly for a file
+replication/replication_manager.cpp.s:
+	$(MAKE) -f CMakeFiles/SkipListProject.dir/build.make CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.s
+.PHONY : replication/replication_manager.cpp.s
+
 server/redis_handler.o: server/redis_handler.cpp.o
 
 .PHONY : server/redis_handler.o
@@ -417,6 +444,9 @@ help:
 	@echo "... node/node.o"
 	@echo "... node/node.i"
 	@echo "... node/node.s"
+	@echo "... replication/replication_manager.o"
+	@echo "... replication/replication_manager.i"
+	@echo "... replication/replication_manager.s"
 	@echo "... server/redis_handler.o"
 	@echo "... server/redis_handler.i"
 	@echo "... server/redis_handler.s"

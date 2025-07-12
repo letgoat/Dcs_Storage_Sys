@@ -122,9 +122,22 @@ CMakeFiles/SkipListProject.dir/node/node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SkipListProject.dir/node/node.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tom/project/skiplist_cpp/node/node.cpp -o CMakeFiles/SkipListProject.dir/node/node.cpp.s
 
+CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.o: CMakeFiles/SkipListProject.dir/flags.make
+CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.o: ../replication/replication_manager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tom/project/skiplist_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.o -c /home/tom/project/skiplist_cpp/replication/replication_manager.cpp
+
+CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tom/project/skiplist_cpp/replication/replication_manager.cpp > CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.i
+
+CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tom/project/skiplist_cpp/replication/replication_manager.cpp -o CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.s
+
 CMakeFiles/SkipListProject.dir/server/redis_handler.cpp.o: CMakeFiles/SkipListProject.dir/flags.make
 CMakeFiles/SkipListProject.dir/server/redis_handler.cpp.o: ../server/redis_handler.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tom/project/skiplist_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SkipListProject.dir/server/redis_handler.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tom/project/skiplist_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SkipListProject.dir/server/redis_handler.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SkipListProject.dir/server/redis_handler.cpp.o -c /home/tom/project/skiplist_cpp/server/redis_handler.cpp
 
 CMakeFiles/SkipListProject.dir/server/redis_handler.cpp.i: cmake_force
@@ -137,7 +150,7 @@ CMakeFiles/SkipListProject.dir/server/redis_handler.cpp.s: cmake_force
 
 CMakeFiles/SkipListProject.dir/server/skiplist_server.cpp.o: CMakeFiles/SkipListProject.dir/flags.make
 CMakeFiles/SkipListProject.dir/server/skiplist_server.cpp.o: ../server/skiplist_server.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tom/project/skiplist_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SkipListProject.dir/server/skiplist_server.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tom/project/skiplist_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SkipListProject.dir/server/skiplist_server.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SkipListProject.dir/server/skiplist_server.cpp.o -c /home/tom/project/skiplist_cpp/server/skiplist_server.cpp
 
 CMakeFiles/SkipListProject.dir/server/skiplist_server.cpp.i: cmake_force
@@ -150,7 +163,7 @@ CMakeFiles/SkipListProject.dir/server/skiplist_server.cpp.s: cmake_force
 
 CMakeFiles/SkipListProject.dir/skiplist/skiplist.cpp.o: CMakeFiles/SkipListProject.dir/flags.make
 CMakeFiles/SkipListProject.dir/skiplist/skiplist.cpp.o: ../skiplist/skiplist.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tom/project/skiplist_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SkipListProject.dir/skiplist/skiplist.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tom/project/skiplist_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/SkipListProject.dir/skiplist/skiplist.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SkipListProject.dir/skiplist/skiplist.cpp.o -c /home/tom/project/skiplist_cpp/skiplist/skiplist.cpp
 
 CMakeFiles/SkipListProject.dir/skiplist/skiplist.cpp.i: cmake_force
@@ -163,7 +176,7 @@ CMakeFiles/SkipListProject.dir/skiplist/skiplist.cpp.s: cmake_force
 
 CMakeFiles/SkipListProject.dir/test/main.cpp.o: CMakeFiles/SkipListProject.dir/flags.make
 CMakeFiles/SkipListProject.dir/test/main.cpp.o: ../test/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tom/project/skiplist_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/SkipListProject.dir/test/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tom/project/skiplist_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SkipListProject.dir/test/main.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SkipListProject.dir/test/main.cpp.o -c /home/tom/project/skiplist_cpp/test/main.cpp
 
 CMakeFiles/SkipListProject.dir/test/main.cpp.i: cmake_force
@@ -176,7 +189,7 @@ CMakeFiles/SkipListProject.dir/test/main.cpp.s: cmake_force
 
 CMakeFiles/SkipListProject.dir/utils/utils.cpp.o: CMakeFiles/SkipListProject.dir/flags.make
 CMakeFiles/SkipListProject.dir/utils/utils.cpp.o: ../utils/utils.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tom/project/skiplist_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SkipListProject.dir/utils/utils.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tom/project/skiplist_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/SkipListProject.dir/utils/utils.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SkipListProject.dir/utils/utils.cpp.o -c /home/tom/project/skiplist_cpp/utils/utils.cpp
 
 CMakeFiles/SkipListProject.dir/utils/utils.cpp.i: cmake_force
@@ -194,6 +207,7 @@ SkipListProject_OBJECTS = \
 "CMakeFiles/SkipListProject.dir/network/redis_protocol.cpp.o" \
 "CMakeFiles/SkipListProject.dir/network/tcp_server.cpp.o" \
 "CMakeFiles/SkipListProject.dir/node/node.cpp.o" \
+"CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.o" \
 "CMakeFiles/SkipListProject.dir/server/redis_handler.cpp.o" \
 "CMakeFiles/SkipListProject.dir/server/skiplist_server.cpp.o" \
 "CMakeFiles/SkipListProject.dir/skiplist/skiplist.cpp.o" \
@@ -208,6 +222,7 @@ SkipListProject_EXTERNAL_OBJECTS =
 ../bin/SkipListProject: CMakeFiles/SkipListProject.dir/network/redis_protocol.cpp.o
 ../bin/SkipListProject: CMakeFiles/SkipListProject.dir/network/tcp_server.cpp.o
 ../bin/SkipListProject: CMakeFiles/SkipListProject.dir/node/node.cpp.o
+../bin/SkipListProject: CMakeFiles/SkipListProject.dir/replication/replication_manager.cpp.o
 ../bin/SkipListProject: CMakeFiles/SkipListProject.dir/server/redis_handler.cpp.o
 ../bin/SkipListProject: CMakeFiles/SkipListProject.dir/server/skiplist_server.cpp.o
 ../bin/SkipListProject: CMakeFiles/SkipListProject.dir/skiplist/skiplist.cpp.o
@@ -215,7 +230,7 @@ SkipListProject_EXTERNAL_OBJECTS =
 ../bin/SkipListProject: CMakeFiles/SkipListProject.dir/utils/utils.cpp.o
 ../bin/SkipListProject: CMakeFiles/SkipListProject.dir/build.make
 ../bin/SkipListProject: CMakeFiles/SkipListProject.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/tom/project/skiplist_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable ../bin/SkipListProject"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/tom/project/skiplist_cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable ../bin/SkipListProject"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SkipListProject.dir/link.txt --verbose=$(VERBOSE)
 	/usr/bin/cmake -E make_directory /home/tom/project/skiplist_cpp/store
 
