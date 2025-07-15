@@ -75,7 +75,7 @@ public:
     std::string getLevelString(LogLevel level) const;
     
     // 检查是否需要轮转日志文件
-    void checkRotation();
+    void checkRotation(const std::string& message);
     
     // 设置日志文件大小限制
     void setMaxFileSize(size_t max_size);
@@ -93,12 +93,13 @@ private:
     // 格式化消息
     template<typename... Args>
     std::string formatMessage(const std::string& format, Args... args) {
-        // 简单的格式化实现，实际项目中可以使用更复杂的格式化库
+        
         std::ostringstream oss;
         formatMessageImpl(oss, format, args...);
         return oss.str();
     }
     
+    // 递归循环调用，直到没有args后
     template<typename T, typename... Args>
     void formatMessageImpl(std::ostringstream& oss, const std::string& format, T value, Args... args) {
         size_t pos = format.find("{}");
@@ -110,6 +111,7 @@ private:
         }
     }
     
+    // 递归结束条件
     void formatMessageImpl(std::ostringstream& oss, const std::string& format) {
         oss << format;
     }
@@ -129,12 +131,12 @@ private:
     bool enable_console_;
     mutable std::mutex log_mutex_;
     size_t max_file_size_;
-    int max_files_;
     size_t current_file_size_;
+    int max_files_;
     bool initializing_ = false;
 };
 
-// 便捷的日志宏
+// 便捷的日志宏，打印日志使用宏即可
 #define LOG_DEBUG(msg) Logger::getInstance().debug(msg)
 #define LOG_INFO(msg) Logger::getInstance().info(msg)
 #define LOG_WARN(msg) Logger::getInstance().warn(msg)

@@ -124,11 +124,15 @@ void Logger::fatal(const std::string& message) {
 }
 
 std::string Logger::getCurrentTimestamp() const {
+    // 获取当前系统时间点
     auto now = std::chrono::system_clock::now();
+    // 将系统时间转换为时间戳
     auto time_t = std::chrono::system_clock::to_time_t(now);
+    // 计算毫秒部分
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(
         now.time_since_epoch()) % 1000;
     
+    // 格式化输出
     std::stringstream ss;
     ss << std::put_time(std::localtime(&time_t), "%Y-%m-%d %H:%M:%S");
     ss << '.' << std::setfill('0') << std::setw(3) << ms.count();
@@ -147,10 +151,9 @@ std::string Logger::getLevelString(LogLevel level) const {
     }
 }
 
-void Logger::checkRotation() {
+void Logger::checkRotation(const std::string& message) {
     std::lock_guard<std::mutex> lock(log_mutex_);
-    
-    if (current_file_size_ >= max_file_size_) {
+    if (current_file_size_ + message.length() >= max_file_size_) {
         rotateLogFile();
     }
 }
@@ -170,25 +173,28 @@ void Logger::rotateLogFile() {
         file_stream_.close();
     }
     
+    // logs/server.log
     std::filesystem::path log_path(log_file_);
-    std::string base_name = log_path.stem().string();
-    std::string extension = log_path.extension().string();
+    // parent_dir: logs/
     std::string parent_dir = log_path.parent_path().string();
-    
+    // base_name: server
+    std::string base_name = log_path.stem().string();
+    // extension: .log
+    std::string extension = log_path.extension().string();
+
     // 删除最老的日志文件
-    for (int i = max_files_ - 1; i >= 0; --i) {
-        std::string old_file = parent_dir + "/" + base_name + "." + std::to_string(i) + extension;
-        if (std::filesystem::exists(old_file)) {
-            std::filesystem::remove(old_file);
-        }
+    int oldest = max_files_ - 1;
+    std::string old_file = parent_dir + "/" + base_name + "." + std::to_string(oldest) + extension;
+    if (std::filesystem::exists(old_file)) {
+        std::filesystem::remove(old_file);
     }
     
     // 重命名现有日志文件
-    for (int i = max_files_ - 2; i >= 0; --i) {
-        std::string old_file = parent_dir + "/" + base_name + "." + std::to_string(i) + extension;
-        std::string new_file = parent_dir + "/" + base_name + "." + std::to_string(i + 1) + extension;
-        if (std::filesystem::exists(old_file)) {
-            std::filesystem::rename(old_file, new_file);
+    for (int i = oldest - 1; i >= 0; --i) {
+        std::string src = parent_dir + "/" + base_name + "." + std::to_string(i) + extension;
+        std::string dst = parent_dir + "/" + base_name + "." + std::to_string(i + 1) + extension;
+        if (std::filesystem::exists(src)) {
+            std::filesystem::rename(src, dst);
         }
     }
     
@@ -198,7 +204,7 @@ void Logger::rotateLogFile() {
         std::filesystem::rename(log_file_, current_backup);
     }
     
-    // 重新打开日志文件
+    // 新建一个日志文件
     file_stream_.open(log_file_, std::ios::app);
     current_file_size_ = 0;
     
@@ -206,6 +212,7 @@ void Logger::rotateLogFile() {
 }
 
 void Logger::writeToFile(const std::string& message) {
+    checkRotation(message);
     if (file_stream_.is_open()) {
         file_stream_ << message;
         file_stream_.flush();
