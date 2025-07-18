@@ -327,7 +327,3 @@ tail -f logs/skiplist.log
 ## 联系方式
 
 如有问题或建议，请提交 Issue 或 Pull Request。
-
----
-
-**注意**: 这是一个教学和演示项目，不建议在生产环境中使用。生产环境请使用成熟的Redis服务器。 
