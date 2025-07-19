@@ -184,18 +184,15 @@ Delete 10000 elements: 38ms
 Performance test completed.
 ```
 
-## 贡献指南
+## 🤝 贡献
+
+欢迎提交Issue和Pull Request！
 
 1. Fork 项目
-2. 创建功能分支
-3. 提交更改
-4. 推送到分支
-5. 创建 Pull Request
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 打开Pull Request
 
-## 许可证
 
-本项目采用 MIT 许可证。
-
-## 联系方式
-
-如有问题或建议，请提交 Issue 或 Pull Request。
+⭐ 如果这个项目对您有帮助，请给它一个星标！
